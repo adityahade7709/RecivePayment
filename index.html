@@ -1,0 +1,640 @@
+<!doctype html>
+<html>
+<head>
+<title>
+    Raje Shivshambhu Seva Pratishthan
+</title>
+<style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    
+    
+    input[type=text], input[type=password] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    
+    
+    button {
+      background-color: #04AA6D;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+    
+    button:hover {
+      opacity: 0.8;
+    }
+    
+    /* Extra styles for the cancel button */
+    .cancelbtn {
+      width: auto;
+      padding: 10px 18px;
+      background-color: #f44336;
+    }
+    
+    /* Center the image and position the close button */
+    .imgcontainer {
+      text-align: center;
+      margin: 24px 0 12px 0;
+      position: relative;
+    }
+    
+    img.avatar {
+      width: 7%;
+      border-radius: 50%;
+    }
+    
+    .container {
+      padding: 16px;
+    }
+    
+    span.psw {
+      float: right;
+      padding-top: 16px;
+    }
+    
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      padding-top: 60px;
+    }
+    
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+      border: 1px solid #888;
+      width: 50%; /* Could be more or less, depending on screen size */
+    }
+    
+    /* The Close Button (x) */
+    .close {
+      position: absolute;
+      right: 25px;
+      top: 0;
+      color: #000;
+      font-size: 35px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: red;
+      cursor: pointer;
+    }
+    
+    /* Add Zoom Animation */
+    .animate {
+      -webkit-animation: animatezoom 0.6s;
+      animation: animatezoom 0.6s
+    }
+    
+    @-webkit-keyframes animatezoom {
+      from {-webkit-transform: scale(0)} 
+      to {-webkit-transform: scale(1)}
+    }
+      
+    @keyframes animatezoom {
+      from {transform: scale(0)} 
+      to {transform: scale(1)}
+    }
+    
+    /* Change styles for span and cancel button on extra small screens */
+    @media screen and (max-width: 300px) {
+      span.psw {
+         display: block;
+         float: none;
+      }
+      .cancelbtn {
+         width: 100%;
+      }
+    }
+    </style>
+</head>
+<body bgcolor="#FBF6D9">
+  <table id="header" width="100%" cellpadding="4" cellspacing="0" bgcolor="#483c32" border="7px orange"> 
+      <tr>
+        <td>
+            <table  width="85%" cellpadding="15" cellspacing="0" align="center">
+                <tr>
+                 <td width="12%">
+                        <img src="20230306_225231.png" alt="LOGO"  width="90px">
+                    </td>
+                    <td>
+                        <font face="arial" color="#ff4500" size="7">
+                          <h><b><center>शिवशंभू सेवा प्रतिष्ठान,<i> महाराष्ट्र राज्य </i></b></h>
+                        </font><br>
+                        <font color="white" size="5"> !! धर्मरक्षा परं धर्म  !!</font></center>
+                    </td>
+                 <td width="12%">
+                        <img src="20230310_170235.png" alt="LOGO"  width="90px">
+                    </td>
+                </table>
+
+            <hr>
+            <table id="header"  width="100%" cellpadding="4" cellspacing="0" bgcolor="#786d5f">
+                <td>
+                    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+            
+                <div id="id01" class="modal">
+                  
+                  <form class="modal-content animate" action="F:\WEBPAGE/action_page.html" method="post"> 
+                    <div class="imgcontainer">
+                      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                      <img src="20230306_225231.png" alt="Avatar" class="avatar">
+                    </div>
+                
+                    <div class="container">
+                      <label for="uname"><b>Username</b></label>
+                      <input type="text" placeholder="Enter Username" name="uname" required>
+                
+                      <label for="psw"><b>Password</b></label>
+                      <input type="password" placeholder="Enter Password" name="psw" required>
+                        
+                      <button type="submit">Login</button>
+                      <label>
+                        <input type="checkbox" checked="checked" name="remember"> Remember me
+                      </label>
+                    </div>
+                
+                    <div class="container" style="background-color:#f1f1f1">
+                      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                      <span class="psw"> <a href="#">Forgot password?</a></span>
+                    </div>
+                  </form>
+                </div>
+                
+                <script>
+                // Get the modal
+                var modal = document.getElementById('id01');
+                
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+                </script>
+                </td>
+                <td width="40%">
+                  
+               </td>   
+            
+                <td>
+                    <a href="#home"><font face="Sans serif" color="#ffffff" size="4">Home</font></a>
+                </td>
+                <td>
+                    <a href="#Social Networks"><font face="Sans serif" color="#ffffff" size="4">Social Networks</font></a>
+                </td>
+                <td>
+                    <a href="#Volunteers"><font face="Sans serif" color="#ffffff" size="4">Volunteers</font></a>
+                </td>
+                <td>
+                    <a href="#Social Work"><font face="Sans serif" color="#ffffff" size="4">Social Work</font></a>
+                </td>
+                <td>
+                    <a href="#About us"><font face="Sans serif" color="#ffffff" size="4">About us</font></a>
+                </td>
+                <td>
+                    <a href="#Contact us"><font face="Sans serif" color="#ffffff" size="4">Contact us</font></a>
+                </td>
+               
+            </table>
+          
+      </center>
+<main><center>
+
+    <table id="home" border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="#2b1b17">
+        <tr>
+            <td>
+                <table border="0" width="85%" cellpadding="15" cellspacing="0" align="center">
+                    <tr>
+                        <td align="center" valign="middle">
+                            <h2>
+                                <font face="arial" color="#ffffff" size="6">
+                                    नमस्कार!
+                                </font>
+                            </h2>
+                        
+                        <h3>
+                            <font face="arial" color="#f3971b" size="7">
+                                आपले सहर्ष स्वागत आहे!
+                           </font>
+                        </h3>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+
+        </tr>
+
+
+    
+  
+
+        <tr>
+            <td>
+                <table border="0" width="100%" cellpadding="15" cellspacing="0" align="center" bgcolor="#2b1b17">
+                   
+                    <tr>
+                        <td height="180" align="center" valign="middle" colspan="2">
+                                <font face="arial" color="#f3971b" size="6">
+                                    🙏 जय श्री राम 🙏
+                                  </font>
+                                <hr width="70" color="#f3971b">
+                        
+                        </td>
+                    </tr>
+                   
+                    <tr>
+                        <td width="40%">
+                            <img src="Picsart_23-03-10_23-47-36-094.png" alt="chatrapati_Shivaji_maharaj"  width="90%">
+                        </td>
+                        <td width="60%">
+                            <font face="arial" color="#ffffff" size="4">
+                                <h2>
+                                    परिवारची उद्दिष्टे
+                                </h2>
+                                राजे शिवरुद्र सेवा प्रतिष्ठान महाराष्ट्र राज्य हा एक परिवार आहे जो आपल्या राजाचा इतिहास हा झाकून न राहता तो प्रत्येक घरापर्यंत पोहचला पाहिजे यासाठी प्रयत्न करतो. आपले “राजे शिवरुद्र सेवा प्रतिष्ठान महाराष्ट्र राज्य” प्रत्येक घरापर्यंत शिवशंभुंचा इतिहास पोहचण्याचे उद्दिष्ठ ठेवतो, व स्वयंसेवेने गडकिल्ल्यांचे, शिवकालीन व इतर ऐतीहासिक वास्तूंचे जतन व संवर्धन करण्याचा पुरेपूर प्रयत्न करतो. आपणही आपल्या परिवाराशी जुळून शिवकर्यास हातभार लावू शकता किवा आर्थिक मदत देऊनही शिवकार्य मोलाचे योगदान देवू शकता.<br><br>
+                                
+                                ⚜️  <b>परिवारची उद्दिष्टे </b> ⚜️<br><br>
+
+                                १. खरा इतिहास लोकांच्या घराघरात पोहोचवणे. <br>
+                                २. अपरिचित इतिहास लोकांपर्यंत पोहोचवणे.<br>
+                                ३. अपरिचित गडकोट किल्ल्यांची माहिती लोकांपर्यंत पोहोचवणे.<br>
+                                ४. गडकोट संवर्धन.*<br>
+                                ५. जनजागृती करणारे सामाजिक उपक्रम राबवणे.<br>
+                                ६. छत्रपती शिवराय आणि शंभूराजे यांच्या विचारांवर चालणे.
+                            </font>
+                        </td>
+                    </tr>
+              </table><br><hr width="60%">
+              <table width="100%" hight="50%">
+                <caption bgcolor="#483c32"><b><font face="arial" color="#2b1b17" size="6">
+                  <marquee behavior="scroll" direction="left" bgcolor="#ffffff" width="40%">spardha w mohima</marquee>
+                </caption>
+                <tr>
+                  <td bgcolor="3d3635" width="35%"><center><br>
+                    <a href="#"><font color="ffffff"><img src="20230313_181620.jpg" width="322px"><br>Adhik Mahiti</font></a>
+                  </center></td>
+                  <td>
+                    <marquee behavior="scroll" direction="left" width="80%"><a href="#"><font color="ffffff">Dhodap Gadsanwardhan Mohim</font></a><br><br>
+                      <a href="#"><font color="ffffff">Shivjayanti wyakhyan spardha</font></a><br><br>
+                      <a href="#"><font color="ffffff">Shivjayanti wyakhyan spardha</font></a><br><br>
+                      <a href="#"><font color="ffffff">wadi killa Gadsanwardhan Mohim</font></a><br><br>
+                      <a href="#"><font color="ffffff">Ganpari sajawat spardha</font></a><br><br>
+                      <a href="#"><font color="ffffff">sambhaji maharaj jayanti prashnamanjusha spardha</font></a><br><br>
+                      <a href="#"><font color="ffffff">kille ankai-tankai sanwardhan Mohim</font></a><br><br>
+                      <a href="#"><font color="ffffff">Kille rajdher diwali dipotsaw</font></a><br><br>
+                      <a href="#"><font color="ffffff">A B C</font></a></marquee><br><br><br><br>
+                  </font></td>
+                </tr>
+              </table>
+ </table><br>
+ 
+ 
+
+
+
+ <br>            
+  <table id="Volunteers">
+       <caption bgcolor="#483c32"><b><font face="arial" color="#f3971b" size="6">
+            कार्यकारनी
+         </font></b></caption>    
+      <table width="99%" border="2px" color="ffffff">
+            <tr>
+             <th><font face="arial" color="#faf884" size="4">
+               nave
+             </font></th>
+             <th width="30%"><font face="arial" color="#faf884" size="4">
+                 pad
+             </font></th>
+             <th width="30%"><font face="arial" color="#faf884" size="4">
+                patta
+             </font></th>
+            </tr>  
+            <tr>
+              <td><font face="arial" color="#faf0dd" size="4">
+                  Ashish shantaram pagar
+              </font></td>
+              <td><font face="arial" color="#faf0dd" size="4">
+                  Sansthapak Adhyaksha
+              </font></td>
+              <td><font face="arial" color="#faf0dd" size="4">
+                dewla, nashik
+              </font></td>
+           </tr> 
+           <tr>  
+              <td><font face="arial" color="#faf0dd" size="4">
+                  Hemant kantilal Mali
+              </font></td>
+              <td><font face="arial" color="#faf0dd" size="4">
+                  Upadhyaksh
+              </font></td>
+              <td><font face="arial" color="#faf0dd" size="4">
+                Jalgaon
+              </font></td>
+            </tr> 
+            <tr>
+              <td><font face="arial" color="#faf0dd" size="4">
+                  Gopal ramesh deshmukh
+              </font></td>
+              <td><font face="arial" color="#faf0dd" size="4">
+                  Sachive
+              </font></td>
+              <td><font face="arial" color="#faf0dd" size="4">
+                Mehkar, Buldhana
+              </font></td>
+            </tr> 
+            <tr>
+              <td><font face="arial" color="#faf0dd" size="4">
+                  Suraj patil
+              </font></td>
+              <td><font face="arial" color="#faf0dd" size="4">
+                  Sahasachive
+              </font></td>
+              <td><font face="arial" color="#faf0dd" size="4">
+                Bodwad, Jalgaon
+              </font></td>
+            </tr> 
+            <tr>
+              <td><font face="arial" color="#faf0dd" size="4">
+                  Vishal jayram dighe
+              </font></td>
+              <td><font face="arial" color="#faf0dd" size="4">
+                  Karyadhyaksh
+                </font></td>
+              <td><font face="arial" color="#faf0dd" size="4">
+                Motala, Buldhana
+              </font></td>
+            </tr> 
+            <tr>
+              <td><font face="arial" color="#faf0dd" size="4">
+                  Aditya Samadhan Hade
+              </font></td>
+              <td><font face="arial" color="#faf0dd" size="4">
+                  Prasiddhi pramukh, Sampark pramukh
+              </font></td>
+              <td><font face="arial" color="#faf0dd" size="4">
+                Risod, Washim
+              </font></td>
+           </tr>
+           <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Gaurav babarao kale 
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                gaurav kale tajnapur kaskf kjfdeljf 
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Gaurav Baburao kale
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+         <tr>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Aditya Samadhan Hade
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+                Prasiddhi pramukh, Sampark pramukh
+            </font></td>
+            <td><font face="arial" color="#faf0dd" size="4">
+              Risod, Washim
+            </font></td>
+         </tr>
+        </font></table>
+ 
+
+<!--Social network and contact Section-->
+  <table id="Social Networks" border="0" width="98%" cellpadding="0" cellspacing="0" bgcolor="#804a00" border="7px orange">
+     
+    <tr><center><th colspan="3" bgcolor="#483c32"><font face="arial" color="#f3971b" size="6" >
+       <b> खालील माध्यमांतुन आपन आमच्या सम्पर्कात राहु शकता</b>
+      </font> </th></center></tr>
+       <tr>
+           <td width="40%">
+               <center> <img src="Picsart_23-03-13_16-29-33-620.png" alt="Mahadev"  width="62%"></center>
+            </td>
+           <td  valign="top"><br>
+               <img src="Picsart_23-03-12_13-41-07-573.png" alt="logo"  width="7%"><a href="www.google.com"><font face="Sans serif" color="#ffffff" size="3">Fallow on Instagram</a><br><br>
+               <img src="Picsart_23-03-12_13-42-29-298.png" alt="logo"  width="8%"><a href="www.google.com"><font face="Sans serif" color="#ffffff" size="3">Like the Facebook Page</a><br><br>
+               <img src="Picsart_23-03-12_13-41-30-960.png" alt="logo"  width="12%"><a href="www.google.com"><font face="Sans serif" color="#ffffff" size="3">Subscribe The Youtube Channal</a><br><br>
+               <img src="Picsart_23-03-12_13-42-11-729.png" alt="logo"  width="11%"><a href="www.google.com"><font face="Sans serif" color="#ffffff" size="3">Join the Whatsapp Group</a><br><br>
+               <img src="Picsart_23-03-12_13-42-11-729.png" alt="logo"  width="11%"><a href="www.google.com"><font face="Sans serif" color="#ffffff" size="3">contact Us on Whatsapp</font></a><br><br>
+           </td>
+           <td width="40%">
+              <center> <img src="Picsart_23-03-13_16-36-38-510.png" alt="Shri Ram"  width="52%"> </center>
+           </td>
+       </tr>
+       <tr>
+         <td><center>
+           <font face="arial" color="#ffffff" size="4"><b> !!हिंदुत्व सर्वोपरी!! </b></font>
+         </center></td>
+         <td>.
+         </td>
+           <td><center>
+             <font face="arial" color="#ffffff" size="4"><b> !!धर्मो रक्शती रक्शीत:!! </b></font>
+           </center></td>
+         </td>
+       </tr>
+     
+    
+    </table>
+</table>
+
+
+</main>
+
+</body> 
+</html>            
