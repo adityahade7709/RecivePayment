@@ -90,6 +90,7 @@
     <div id="popup" class="popup">
         <h3>Scan to Pay</h3>
         <div id="qrcode"></div>
+        <canvas id="qrCanvas" style="display:none;"></canvas>
         <button class="save-button" onclick="saveQRCode()">Save QR Code</button>
         <button onclick="closePopup()">Close</button>
     </div>
@@ -113,13 +114,14 @@
                 let upiLink = `upi://pay?pa=${upiId}&pn=Aditya&am=${amount}&cu=INR`;
                 document.getElementById("qrcode").innerHTML = ""; // Clear previous QR
 
-                new QRCode(document.getElementById("qrcode"), {
+                let qr = new QRCode(document.getElementById("qrcode"), {
                     text: upiLink,
                     width: 200,
-                    height: 200
+                    height: 200,
+                    correctLevel: QRCode.CorrectLevel.H // High correction level
                 });
 
-                setTimeout(() => {  // Ensure QR code is fully generated
+                setTimeout(() => {
                     document.getElementById("popup").style.display = "block";
                 }, 500);
             } else {
@@ -133,16 +135,17 @@
 
         function saveQRCode() {
             let qrElement = document.querySelector("#qrcode img");
+
             if (!qrElement) {
                 alert("QR code not generated yet!");
                 return;
             }
 
-            let canvas = document.createElement("canvas");
+            let canvas = document.getElementById("qrCanvas");
             let ctx = canvas.getContext("2d");
-            let size = 300;
-            canvas.width = size;
-            canvas.height = size + 80;
+
+            canvas.width = 300;
+            canvas.height = 350;
 
             ctx.fillStyle = "#ffffff";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -153,7 +156,7 @@
             ctx.fillText("Scan to Pay", canvas.width / 2, 30);
 
             let img = new Image();
-            img.crossOrigin = "anonymous"; // Prevents CORS issues
+            img.crossOrigin = "anonymous";
             img.src = qrElement.src;
 
             img.onload = function () {
@@ -168,7 +171,7 @@
             };
 
             img.onerror = function () {
-                alert("Failed to load QR image. Please try again.");
+                alert("Failed to load QR image. Please regenerate.");
             };
         }
 
