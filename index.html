@@ -186,51 +186,55 @@
         function saveQRCode() {
     let qrElement = document.getElementById("qrcode").getElementsByTagName("img")[0];
     
-    if (qrElement) {
-        let canvas = document.createElement("canvas");
-        let ctx = canvas.getContext("2d");
-        let size = 300;
-        canvas.width = size;
-        canvas.height = size + 80;
-        
-        // Background
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Title
-        ctx.fillStyle = "#007bff";
-        ctx.font = "20px Arial";
-        ctx.textAlign = "center";
-        ctx.fillText("Scan to Pay", canvas.width / 2, 30);
-        
-        // Draw QR code
-        let img = new Image();
-        img.crossOrigin = "Anonymous"; // Prevent CORS issues
-        img.src = qrElement.src;
-
-        img.onload = function () {
-            ctx.drawImage(img, 50, 50, 200, 200);
-            
-            // Convert canvas to Blob for better mobile compatibility
-            canvas.toBlob(function(blob) {
-                if (window.navigator.msSaveOrOpenBlob) {
-                    // For Internet Explorer
-                    window.navigator.msSaveOrOpenBlob(blob, "UPI_QR_Code.png");
-                } else {
-                    // Create a download link
-                    let link = document.createElement("a");
-                    link.href = URL.createObjectURL(blob);
-                    link.download = "UPI_QR_Code.png";
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                }
-            }, "image/png");
-        };
-    } else {
+    if (!qrElement) {
         alert("QR code not generated yet!");
+        return;
     }
+
+    let canvas = document.createElement("canvas");
+    let ctx = canvas.getContext("2d");
+    let size = 300;
+    canvas.width = size;
+    canvas.height = size + 80;
+
+    // Background
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Title
+    ctx.fillStyle = "#007bff";
+    ctx.font = "20px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("Scan to Pay", canvas.width / 2, 30);
+
+    // Draw QR code
+    let img = new Image();
+    img.crossOrigin = "Anonymous"; // Fix CORS issue for mobile
+    img.src = qrElement.src;
+
+    img.onload = function () {
+        ctx.drawImage(img, 50, 50, 200, 200);
+
+        // Convert to Blob and trigger download
+        canvas.toBlob(function(blob) {
+            let url = URL.createObjectURL(blob);
+            let link = document.createElement("a");
+            link.href = url;
+            link.download = "UPI_QR_Code.png";
+
+            // Trigger download (works for both desktop & mobile)
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }, "image/png");
+    };
+
+    img.onerror = function () {
+        alert("Failed to generate QR code image. Try again.");
+    };
 }
+
 
 
         // Helper function to validate UPI ID (basic check)
