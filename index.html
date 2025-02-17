@@ -184,40 +184,54 @@
 
         // Step 4: Save the generated QR code
         function saveQRCode() {
-            let qrElement = document.getElementById("qrcode").getElementsByTagName("img")[0];
-            if (qrElement) {
-                let canvas = document.createElement("canvas");
-                let ctx = canvas.getContext("2d");
-                let size = 300;
-                canvas.width = size;
-                canvas.height = size + 80;
-                
-                // Background
-                ctx.fillStyle = "#ffffff";
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-                
-                // Title
-                ctx.fillStyle = "#007bff";
-                ctx.font = "20px Arial";
-                ctx.textAlign = "center";
-                ctx.fillText("Scan to Pay", canvas.width / 2, 30);
-                
-                // Draw QR code
-                let img = new Image();
-                img.src = qrElement.src;
-                img.onload = function () {
-                    ctx.drawImage(img, 50, 50, 200, 200);
-                    
-                    // Save QR as image
+    let qrElement = document.getElementById("qrcode").getElementsByTagName("img")[0];
+    
+    if (qrElement) {
+        let canvas = document.createElement("canvas");
+        let ctx = canvas.getContext("2d");
+        let size = 300;
+        canvas.width = size;
+        canvas.height = size + 80;
+        
+        // Background
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Title
+        ctx.fillStyle = "#007bff";
+        ctx.font = "20px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText("Scan to Pay", canvas.width / 2, 30);
+        
+        // Draw QR code
+        let img = new Image();
+        img.crossOrigin = "Anonymous"; // Prevent CORS issues
+        img.src = qrElement.src;
+
+        img.onload = function () {
+            ctx.drawImage(img, 50, 50, 200, 200);
+            
+            // Convert canvas to Blob for better mobile compatibility
+            canvas.toBlob(function(blob) {
+                if (window.navigator.msSaveOrOpenBlob) {
+                    // For Internet Explorer
+                    window.navigator.msSaveOrOpenBlob(blob, "UPI_QR_Code.png");
+                } else {
+                    // Create a download link
                     let link = document.createElement("a");
-                    link.href = canvas.toDataURL("image/png");
+                    link.href = URL.createObjectURL(blob);
                     link.download = "UPI_QR_Code.png";
+                    document.body.appendChild(link);
                     link.click();
-                };
-            } else {
-                alert("QR code not generated yet!");
-            }
-        }
+                    document.body.removeChild(link);
+                }
+            }, "image/png");
+        };
+    } else {
+        alert("QR code not generated yet!");
+    }
+}
+
 
         // Helper function to validate UPI ID (basic check)
         function validateUPI(upi) {
