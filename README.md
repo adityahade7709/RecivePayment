@@ -1,2 +1,2 @@
-# pratishthan
-shivrudra
+# Recive Payment 
+UPI
