@@ -6,8 +6,35 @@
     <title>UPI QR Code Generator</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; background-color: #f4f4f4; }
-        input { padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }
+        /* Basic reset and layout */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            height: 100vh; /* Make body full height */
+            justify-content: space-between; /* Push footer to the bottom */
+            padding: 20px;
+        }
+
+        main {
+            flex-grow: 1; /* Allow content to grow */
+            text-align: center;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
         button { 
             padding: 10px 20px; 
             font-size: 16px; 
@@ -18,7 +45,11 @@
             color: white; 
             cursor: pointer; 
         }
-        button:hover { background-color: #218838; }
+
+        button:hover { 
+            background-color: #218838; 
+        }
+
         .popup {
             display: none;
             position: fixed;
@@ -31,40 +62,89 @@
             border-radius: 10px;
             text-align: center;
         }
-        .popup h3 { margin-bottom: 15px; }
+
+        .popup h3 { 
+            margin-bottom: 15px; 
+        }
+
         .popup button {
             background-color: #dc3545;
             margin-top: 15px;
         }
-        .popup button:hover { background-color: #c82333; }
+
+        .popup button:hover { 
+            background-color: #c82333; 
+        }
+
         .save-button {
             background-color: #007bff;
             margin-top: 10px;
         }
-        .save-button:hover { background-color: #0056b3; }
+
+        .save-button:hover { 
+            background-color: #0056b3; 
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #28a745;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 600px) {
+            footer {
+                font-size: 12px;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
-    <h2>Generate UPI QR Code</h2>
-    
-    <div id="upiInput">
-        <label>Enter your UPI ID: </label>
-        <input type="text" id="upiId" placeholder="Enter UPI ID" required>
-        <button onclick="showAmountInput()">Next</button>
-    </div>
+    <main>
+        <h2>Generate UPI QR Code</h2>
+        
+        <div id="upiInput">
+            <label>Enter your UPI ID: </label>
+            <input type="text" id="upiId" placeholder="Enter UPI ID" required>
+            <button onclick="showAmountInput()">Next</button>
+        </div>
 
-    <div id="amountInput" style="display:none;">
-        <label>Enter Amount (INR): </label>
-        <input type="number" id="amount" placeholder="Enter amount" min="1" required>
-        <button onclick="generateQR()">Generate QR Code</button>
-    </div>
+        <div id="amountInput" style="display:none;">
+            <label>Enter Amount (INR): </label>
+            <input type="number" id="amount" placeholder="Enter amount" min="1" required>
+            <button onclick="generateQR()">Generate QR Code</button>
+        </div>
 
-    <div id="popup" class="popup">
-        <h3>Scan to Pay</h3>
-        <div id="qrcode"></div>
-        <button class="save-button" onclick="saveQRCode()">Save QR Code</button>
-        <button onclick="closePopup()">Close</button>
-    </div>
+        <div id="popup" class="popup">
+            <h3>Scan to Pay</h3>
+            <div id="qrcode"></div>
+            <button class="save-button" onclick="saveQRCode()">Save QR Code</button>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 AD. All Rights Reserved. | Aditya Hade</p>
+    </footer>
 
     <script>
         let upiId = '';
