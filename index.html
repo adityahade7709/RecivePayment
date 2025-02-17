@@ -6,48 +6,34 @@
     <title>UPI QR Code Generator</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        /* Basic reset and layout */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             display: flex;
             flex-direction: column;
-            height: 100vh; /* Make body full height */
-            justify-content: space-between; /* Push footer to the bottom */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
             padding: 20px;
         }
 
-        main {
-            flex-grow: 1; /* Allow content to grow */
-            text-align: center;
-        }
-
-        input {
+        input, button {
             padding: 10px;
             font-size: 16px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            margin: 10px;
         }
 
-        button { 
-            padding: 10px 20px; 
-            font-size: 16px; 
-            margin-top: 10px; 
-            border: none; 
-            border-radius: 5px; 
-            background-color: #28a745; 
-            color: white; 
-            cursor: pointer; 
+        button {
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
         }
 
-        button:hover { 
-            background-color: #218838; 
+        button:hover {
+            background-color: #218838;
         }
 
         .popup {
@@ -63,8 +49,8 @@
             text-align: center;
         }
 
-        .popup h3 { 
-            margin-bottom: 15px; 
+        .popup h3 {
+            margin-bottom: 15px;
         }
 
         .popup button {
@@ -72,84 +58,45 @@
             margin-top: 15px;
         }
 
-        .popup button:hover { 
-            background-color: #c82333; 
+        .popup button:hover {
+            background-color: #c82333;
         }
 
         .save-button {
             background-color: #007bff;
-            margin-top: 10px;
         }
 
-        .save-button:hover { 
-            background-color: #0056b3; 
-        }
-
-        /* Footer Styles */
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 15px;
-            text-align: center;
-            font-size: 14px;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        footer p {
-            margin: 0;
-        }
-
-        footer a {
-            color: #28a745;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsive Design */
-        @media screen and (max-width: 600px) {
-            footer {
-                font-size: 12px;
-                padding: 10px;
-            }
+        .save-button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <main>
-        <h2>Generate UPI QR Code</h2>
-        
-        <div id="upiInput">
-            <label>Enter your UPI ID: </label>
-            <input type="text" id="upiId" placeholder="Enter UPI ID" required>
-            <button onclick="showAmountInput()">Next</button>
-        </div>
 
-        <div id="amountInput" style="display:none;">
-            <label>Enter Amount (INR): </label>
-            <input type="number" id="amount" placeholder="Enter amount" min="1" required>
-            <button onclick="generateQR()">Generate QR Code</button>
-        </div>
+    <h2>Generate UPI QR Code</h2>
 
-        <div id="popup" class="popup">
-            <h3>Scan to Pay</h3>
-            <div id="qrcode"></div>
-            <button class="save-button" onclick="saveQRCode()">Save QR Code</button>
-            <button onclick="closePopup()">Close</button>
-        </div>
-    </main>
+    <div id="upiInput">
+        <label>Enter your UPI ID:</label>
+        <input type="text" id="upiId" placeholder="example@upi" required>
+        <button onclick="showAmountInput()">Next</button>
+    </div>
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2025 AD. All Rights Reserved. | Aditya Hade</p>
-    </footer>
+    <div id="amountInput" style="display:none;">
+        <label>Enter Amount (INR):</label>
+        <input type="number" id="amount" placeholder="Enter amount" min="1" required>
+        <button onclick="generateQR()">Generate QR Code</button>
+    </div>
+
+    <div id="popup" class="popup">
+        <h3>Scan to Pay</h3>
+        <div id="qrcode"></div>
+        <button class="save-button" onclick="saveQRCode()">Save QR Code</button>
+        <button onclick="closePopup()">Close</button>
+    </div>
 
     <script>
         let upiId = '';
 
-        // Step 1: Show the amount input field after getting the UPI ID
         function showAmountInput() {
             upiId = document.getElementById("upiId").value.trim();
             if (upiId && validateUPI(upiId)) {
@@ -160,90 +107,75 @@
             }
         }
 
-        // Step 2: Generate QR code based on the UPI ID and amount
         function generateQR() {
             let amount = document.getElementById("amount").value;
             if (amount && amount > 0) {
                 let upiLink = `upi://pay?pa=${upiId}&pn=Aditya&am=${amount}&cu=INR`;
                 document.getElementById("qrcode").innerHTML = ""; // Clear previous QR
+
                 new QRCode(document.getElementById("qrcode"), {
                     text: upiLink,
                     width: 200,
                     height: 200
                 });
-                document.getElementById("popup").style.display = "block";
+
+                setTimeout(() => {  // Ensure QR code is fully generated
+                    document.getElementById("popup").style.display = "block";
+                }, 500);
             } else {
                 alert("Please enter a valid amount.");
             }
         }
 
-        // Step 3: Close the QR code popup
         function closePopup() {
             document.getElementById("popup").style.display = "none";
         }
 
-        // Step 4: Save the generated QR code
         function saveQRCode() {
-    let qrElement = document.getElementById("qrcode").getElementsByTagName("img")[0];
+            let qrElement = document.querySelector("#qrcode img");
+            if (!qrElement) {
+                alert("QR code not generated yet!");
+                return;
+            }
 
-    if (!qrElement) {
-        alert("QR code not generated yet!");
-        return;
-    }
+            let canvas = document.createElement("canvas");
+            let ctx = canvas.getContext("2d");
+            let size = 300;
+            canvas.width = size;
+            canvas.height = size + 80;
 
-    let canvas = document.createElement("canvas");
-    let ctx = canvas.getContext("2d");
-    let size = 300;
-    canvas.width = size;
-    canvas.height = size + 80;
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Background
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#007bff";
+            ctx.font = "20px Arial";
+            ctx.textAlign = "center";
+            ctx.fillText("Scan to Pay", canvas.width / 2, 30);
 
-    // Title
-    ctx.fillStyle = "#007bff";
-    ctx.font = "20px Arial";
-    ctx.textAlign = "center";
-    ctx.fillText("Scan to Pay", canvas.width / 2, 30);
+            let img = new Image();
+            img.crossOrigin = "anonymous"; // Prevents CORS issues
+            img.src = qrElement.src;
 
-    // Create a new canvas for the QR code
-    let qrCanvas = document.createElement("canvas");
-    let qrCtx = qrCanvas.getContext("2d");
+            img.onload = function () {
+                ctx.drawImage(img, 50, 50, 200, 200);
 
-    let img = new Image();
-    img.src = qrElement.src;
-    img.crossOrigin = "Anonymous"; // Fix CORS issue
+                let link = document.createElement("a");
+                link.href = canvas.toDataURL("image/png");
+                link.download = "UPI_QR_Code.png";
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            };
 
-    img.onload = function () {
-        qrCanvas.width = img.width;
-        qrCanvas.height = img.height;
-        qrCtx.drawImage(img, 0, 0);
+            img.onerror = function () {
+                alert("Failed to load QR image. Please try again.");
+            };
+        }
 
-        // Draw the QR code onto the main canvas
-        ctx.drawImage(qrCanvas, 50, 50, 200, 200);
-
-        // Convert canvas to image and trigger download
-        let link = document.createElement("a");
-        link.href = canvas.toDataURL("image/png");
-        link.download = "UPI_QR_Code.png";
-        link.click();
-    };
-
-    img.onerror = function () {
-        alert("Failed to load QR image. Please try again.");
-    };
-}
-
-
-
-
-
-        // Helper function to validate UPI ID (basic check)
         function validateUPI(upi) {
-            // UPI ID should have '@' and follow general format
             return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+$/.test(upi);
         }
     </script>
+
 </body>
 </html>
