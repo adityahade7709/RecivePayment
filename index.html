@@ -207,39 +207,34 @@
     ctx.textAlign = "center";
     ctx.fillText("Scan to Pay", canvas.width / 2, 30);
 
-    // Create a new Image object and set its src to the existing QR image
+    // Create a new canvas for the QR code
+    let qrCanvas = document.createElement("canvas");
+    let qrCtx = qrCanvas.getContext("2d");
+
     let img = new Image();
-    img.crossOrigin = "Anonymous"; // Fix CORS issue for mobile
     img.src = qrElement.src;
+    img.crossOrigin = "Anonymous"; // Fix CORS issue
 
     img.onload = function () {
-        // Draw the QR code image only after it is fully loaded
-        ctx.drawImage(img, 50, 50, 200, 200);
+        qrCanvas.width = img.width;
+        qrCanvas.height = img.height;
+        qrCtx.drawImage(img, 0, 0);
 
-        // Convert to Blob and trigger download
-        canvas.toBlob(function(blob) {
-            if (!blob) {
-                alert("Failed to create image. Try again.");
-                return;
-            }
+        // Draw the QR code onto the main canvas
+        ctx.drawImage(qrCanvas, 50, 50, 200, 200);
 
-            let url = URL.createObjectURL(blob);
-            let link = document.createElement("a");
-            link.href = url;
-            link.download = "UPI_QR_Code.png";
-
-            // Trigger download (works for both desktop & mobile)
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        }, "image/png");
+        // Convert canvas to image and trigger download
+        let link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "UPI_QR_Code.png";
+        link.click();
     };
 
     img.onerror = function () {
-        alert("Error loading QR image. Try regenerating the QR code.");
+        alert("Failed to load QR image. Please try again.");
     };
 }
+
 
 
 
