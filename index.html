@@ -182,6 +182,7 @@
             </div>
             <button class="save-button" onclick="saveQRCode()">Save QR Code</button>
             <button class="close-button" onclick="closePopup()">Close</button>
+            <button class="share-button" onclick="shareQRCode()">Share QR Code</button>
         </div>
     </div>
 
@@ -258,6 +259,26 @@
                 link.click();
 
                 buttons.forEach(btn => btn.style.display = "block");
+            });
+        }
+
+        function shareQRCode() {
+            let qrContainer = document.getElementById("qrBox");
+            html2canvas(qrContainer, { scale: 2, useCORS: true }).then(canvas => {
+                canvas.toBlob(blob => {
+                    const file = new File([blob], "UPI_QR_Code.png", { type: "image/png" });
+                    const shareData = {
+                        title: "UPI QR Code",
+                        text: "Scan this QR code to make a payment.",
+                        files: [file]
+                    };
+                    
+                    if (navigator.canShare && navigator.canShare(shareData)) {
+                        navigator.share(shareData).catch(err => console.error("Share Error: ", err));
+                    } else {
+                        alert("Sharing not supported on this device.");
+                    }
+                });
             });
         }
 
