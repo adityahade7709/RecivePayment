@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UPI QR Code Generator</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode/minified/html5-qrcode.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -145,13 +146,20 @@
         <label>Enter your UPI ID:</label>
         <input type="text" id="upiId" placeholder="example@upi" required>
         <button onclick="showAmountInput()">Next</button>
+        <button onclick="startQRScanner()">Scan QR Code</button>
     </div>
-
+    
+    <div id="qrScanner" style="display:none;">
+        <h3>Scan Payment QR Code</h3>
+        <div id="reader" style="width: 300px;"></div>
+        <button onclick="stopQRScanner()">Close Scanner</button>
+    </div>
+    
     <div id="amountInput" style="display:none;">
         <label>Enter Amount (INR):</label>
         <input type="number" id="amount" placeholder="Enter amount" min="1" required>
         <br>
-        <input type="checkbox" id="splitCheck" onchange="toggleSplitInput()"> Split among in peoples?
+        <input type="checkbox" id="splitCheck" onchange="toggleSplitInput()"> Split among people?
         <input type="number" id="numPersons" placeholder="Enter number of persons" min="1" style="display:none;">
         <button onclick="generateQR()">Generate QR Code</button>
     </div>
@@ -173,10 +181,16 @@
     </div>
 
     <canvas id="qrCanvas" style="display:none;"></canvas>
+
+    <footer style="text-align: center; padding: 10px; background: #f1f1f1; position: fixed; bottom: 0; width: 100%; font-size: 14px;">
+        <p>&copy; 2025 AD. All rights reserved. | Aditya Hade.</p>
+    </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <script>
         let upiId = '';
+        let html5QrCode;
 
         function showAmountInput() {
             upiId = document.getElementById("upiId").value.trim();
@@ -228,25 +242,19 @@
 
         function saveQRCode() {
             let qrContainer = document.getElementById("qrBox");
-            let buttons = qrContainer.querySelectorAll("button"); // Select buttons
+            let buttons = qrContainer.querySelectorAll("button");
 
-            // Hide buttons before capture
             buttons.forEach(btn => btn.style.display = "none");
 
-            html2canvas(qrContainer, {
-                scale: 2,
-                useCORS: true
-            }).then(canvas => {
+            html2canvas(qrContainer, { scale: 2, useCORS: true }).then(canvas => {
                 let link = document.createElement("a");
                 link.href = canvas.toDataURL("image/png");
                 link.download = "UPI_QR_Code.png";
                 link.click();
 
-                // Show buttons again after saving
                 buttons.forEach(btn => btn.style.display = "block");
             });
         }
-
 
         function validateUPI(upi) {
             return /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+$/.test(upi);
@@ -256,7 +264,20 @@
             const qrBox = document.getElementById("qrBox");
             qrBox.classList.toggle("vertical", window.innerWidth < 600);
         }
-    </script>
 
+        function startQRScanner() {
+            document.getElementById("qrScanner").style.display = "block";
+            html5QrCode = new Html5Qrcode("reader");
+            html5QrCode.start({ facingMode: "environment" }, { fps: 10, qrbox: 250 }, qrCodeMessage => {
+                document.getElementById("upiId").value = qrCodeMessage.match(/pa=([^&]*)/)[1];
+                stopQRScanner();
+            }).catch(err => console.error(err));
+        }
+
+        function stopQRScanner() {
+            if (html5QrCode) html5QrCode.stop();
+            document.getElementById("qrScanner").style.display = "none";
+        }
+    </script>
 </body>
 </html>
