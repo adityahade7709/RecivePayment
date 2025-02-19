@@ -264,6 +264,9 @@
 
         function shareQRCode() {
             let qrContainer = document.getElementById("qrBox");
+            let buttons = qrContainer.querySelectorAll("button");
+
+            buttons.forEach(btn => btn.style.display = "none");
             html2canvas(qrContainer, { scale: 2, useCORS: true }).then(canvas => {
                 canvas.toBlob(blob => {
                     const file = new File([blob], "UPI_QR_Code.png", { type: "image/png" });
